@@ -5,12 +5,12 @@ import javax.inject.Inject
 
 class NewsMapperUi @Inject constructor() {
 
-    fun DataDomain.mapDomainToUi() = DataUi(
-        id = this.id,
-        title = this.title,
-        description = this.description,
-        pubDate = this.pubDate,
-        image = this.image,
-        dcCreator = this.dcCreator,
+    fun mapDomainToUi(dataDomain: DataDomain) = DataUi(
+        id = dataDomain.id,
+        title = dataDomain.title,
+        description = dataDomain.description,
+        pubDate = dataDomain.pubDate,
+        image = dataDomain.image,
+        dcCreator = dataDomain.dcCreator,
     )
 }
