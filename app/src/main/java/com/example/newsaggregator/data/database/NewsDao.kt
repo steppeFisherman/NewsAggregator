@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.newsaggregator.data.models.cacheModel.DataCache
+import com.example.newsaggregator.data.model.cacheModel.DataCache
 
 @Dao
 interface NewsDao {

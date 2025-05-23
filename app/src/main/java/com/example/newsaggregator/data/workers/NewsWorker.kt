@@ -9,7 +9,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkerParameters
 import com.example.newsaggregator.data.database.NewsDao
-import com.example.newsaggregator.data.models.NewsMapper
+import com.example.newsaggregator.data.model.NewsMapperData
 import com.example.newsaggregator.data.network.ApiService
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -22,7 +22,7 @@ class NewsWorker @AssistedInject constructor(
     @Assisted private val workerParameters: WorkerParameters,
     @Assisted private val newsDao: NewsDao,
     @Assisted val apiService: ApiService,
-    @Assisted val mapper: NewsMapper
+    @Assisted val mapper: NewsMapperData
 ) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
@@ -52,7 +52,7 @@ class NewsWorker @AssistedInject constructor(
     class Factory @Inject constructor(
         private val newsDao: NewsDao,
         private val apiService: ApiService,
-        private val mapper: NewsMapper
+        private val mapper: NewsMapperData
     ) : ChildWorkerFactory {
 
         override fun create(

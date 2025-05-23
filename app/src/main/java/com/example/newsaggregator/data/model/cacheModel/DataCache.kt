@@ -1,4 +1,4 @@
-package com.example.newsaggregator.data.models.cacheModel
+package com.example.newsaggregator.data.model.cacheModel
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,4 +7,5 @@ import androidx.room.PrimaryKey
 data class DataCache(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-)
+    val lastUpdate: Long?,
+    )

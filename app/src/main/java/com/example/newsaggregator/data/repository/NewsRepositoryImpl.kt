@@ -6,7 +6,7 @@ import androidx.lifecycle.map
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.example.newsaggregator.data.database.NewsDao
-import com.example.newsaggregator.data.models.NewsMapper
+import com.example.newsaggregator.data.model.NewsMapperData
 import com.example.newsaggregator.data.workers.NewsWorker
 import com.example.newsaggregator.domain.model.DataDomain
 import com.example.newsaggregator.domain.usecases.NewsRepository
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class NewsRepositoryImpl @Inject constructor(
     private val application: Application,
     private val newsDao: NewsDao,
-    private val mapper: NewsMapper
+    private val mapper: NewsMapperData
 ) : NewsRepository {
 
     override fun fetchNewsList(): LiveData<List<DataDomain>> {

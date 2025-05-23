@@ -1,6 +1,6 @@
 package com.example.newsaggregator.data.network
 
-import com.example.newsaggregator.data.models.cloudModel.RssDto
+import com.example.newsaggregator.data.model.cloudModel.RssDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 

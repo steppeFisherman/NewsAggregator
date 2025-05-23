@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.newsaggregator.data.models.cacheModel.DataCache
+import com.example.newsaggregator.data.model.cacheModel.DataCache
 
 @Database(entities = [DataCache::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

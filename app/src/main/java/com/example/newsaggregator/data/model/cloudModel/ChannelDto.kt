@@ -1,4 +1,4 @@
-package com.example.newsaggregator.data.models.cloudModel
+package com.example.newsaggregator.data.model.cloudModel
 
 import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.serialization.XmlElement
