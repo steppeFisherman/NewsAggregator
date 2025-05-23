@@ -1,7 +1,5 @@
 package com.example.newsaggregator.ui.model
 
-import com.example.newsaggregator.data.model.cacheModel.DataCache
-import com.example.newsaggregator.data.model.cloudModel.RssDto
 import com.example.newsaggregator.domain.model.DataDomain
 import javax.inject.Inject
 
@@ -9,6 +7,10 @@ class NewsMapperUi @Inject constructor() {
 
     fun DataDomain.mapDomainToUi() = DataUi(
         id = this.id,
-        lastUpdate = this.lastUpdate,
+        title = this.title,
+        description = this.description,
+        pubDate = this.pubDate,
+        image = this.image,
+        dcCreator = this.dcCreator,
     )
 }

@@ -29,15 +29,16 @@ class NewsWorker @AssistedInject constructor(
 
         while (true) {
             try {
-                Log.d("MyCoroutineWorker", "doWork")
-                val dataCloud = apiService.getFullNewsList()
+                val dataCloud = apiService.getFullNewsList().channel.items
+                val cacheList = mapper.mapCloudToCache(dataCloud)
+                newsDao.deleteAll()
+                newsDao.insertNewsList(cacheList)
             } catch (e: Exception) {
-                e.message
+                Log.d("MyCoroutineWorker", "doWork exception:$e")
             }
 
-            delay(3000)
+            delay(10000)
         }
-
     }
 
     companion object {

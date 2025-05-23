@@ -15,5 +15,8 @@ interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewsList(newsList: List<DataCache>)
+
+    @Query("DELETE FROM full_news_list")
+    suspend fun deleteAll()
 }
 

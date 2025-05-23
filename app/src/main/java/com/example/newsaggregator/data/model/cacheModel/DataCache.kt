@@ -7,5 +7,9 @@ import androidx.room.PrimaryKey
 data class DataCache(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val lastUpdate: Long?,
+    val title: String,
+    val description: String,
+    val pubDate: String,
+    val image: String,
+    val dcCreator: String,
     )

@@ -10,7 +10,6 @@ import com.example.newsaggregator.data.repository.NewsRepositoryImpl
 import com.example.newsaggregator.data.workers.ChildWorkerFactory
 import com.example.newsaggregator.data.workers.NewsWorker
 import com.example.newsaggregator.domain.usecases.NewsRepository
-import com.example.newsaggregator.ui.model.NewsMapperUi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

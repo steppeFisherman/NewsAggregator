@@ -1,6 +1,7 @@
 package com.example.newsaggregator.ui.screens
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        vm.newsList
+        vm.newsList.observe(this){ list ->
+                Log.d("MainActivity", "size: ${list.size} \n\n")
+        }
 
     }
 }
