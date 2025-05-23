@@ -37,13 +37,14 @@ class NewsWorker @AssistedInject constructor(
                 Log.d("MyCoroutineWorker", "doWork exception:$e")
             }
 
-            delay(10000)
+            delay(FIFTEEN_MINUTES)
         }
     }
 
     companion object {
 
         const val NAME = "NewsWorker"
+        const val FIFTEEN_MINUTES = 900_000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<NewsWorker>().build()

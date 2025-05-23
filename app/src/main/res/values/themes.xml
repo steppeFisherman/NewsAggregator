@@ -6,20 +6,20 @@
     <style name="titleStyle">
         <item name="android:layout_width">@dimen/_0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/_24sp</item>
-        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black_textView</item>
+        <item name="android:textSize">@dimen/_16sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:padding">@dimen/_4dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="descStyle">
         <item name="android:layout_width">@dimen/_0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/_16sp</item>
-        <item name="android:maxLines">6</item>
+        <item name="android:textColor">@color/grey_classic</item>
+        <item name="android:textSize">@dimen/_14sp</item>
+        <item name="android:maxLines">7</item>
         <item name="android:ellipsize">end</item>
         <item name="android:padding">@dimen/_4dp</item>
     </style>
@@ -28,7 +28,7 @@
         <item name="android:layout_width">@dimen/_0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/_14sp</item>
+        <item name="android:textSize">@dimen/_12sp</item>
         <item name="android:singleLine">true</item>
         <item name="android:padding">@dimen/_4dp</item>
     </style>
@@ -36,7 +36,6 @@
     <style name="imageStyle">
         <item name="android:layout_width">@dimen/news_image_width</item>
         <item name="android:layout_height">@dimen/news_image_height</item>
-        <item name="android:layout_margin">@dimen/_4dp</item>
     </style>
 
     <style name="toolBar">

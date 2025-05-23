@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4dp"
+    android:elevation="@dimen/_8dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,15 +18,16 @@
             style="@style/imageStyle"
             android:contentDescription="@string/image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/title"
             style="@style/titleStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/news_image"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/news_image"
             tools:text="Some random News" />
 
         <TextView
@@ -34,15 +36,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/news_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/news_image"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/news_image"
             tools:text="Some random News description" />
 
         <TextView
             android:id="@+id/pubDate"
             style="@style/simpleStyle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_center"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toBottomOf="@+id/news_image"
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/news_image"
             tools:text="23 May 2025, 21:52" />
@@ -50,19 +51,25 @@
         <TextView
             android:id="@+id/author"
             style="@style/simpleStyle"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/news_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@id/guideline_vertical_center"
+            app:layout_constraintStart_toEndOf="@id/guideline_vertical_right"
             app:layout_constraintTop_toBottomOf="@+id/news_image"
             tools:text="Martin Fisher" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_vertical_center"
+            android:id="@+id/guideline_vertical_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

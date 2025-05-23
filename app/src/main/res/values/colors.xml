@@ -11,5 +11,8 @@
     <color name="main_screen">#FBFBFB</color>
     <color name="grey_category_textView">#C3C4C9</color>
     <color name="black_textView">#010035</color>
+    <color name="grey_classic">#666666  </color>
+    <color name="deepBlue">#2460A7FF</color>
+    <color name="stroke_color">#222831</color>
 
 </resources>

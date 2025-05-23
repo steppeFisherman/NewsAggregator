@@ -61,7 +61,7 @@ class MainFragment : Fragment() {
     private fun adapterSetUp() {
         mAdapter = MainFragmentAdapter(LoadImage.Base()) {
             findNavController().navigate(
-                MainFragmentDirections.actionMainFragmentToWebViewFragment("from MainFragment")
+                MainFragmentDirections.actionMainFragmentToWebViewFragment(it.title)
             )
         }
         binding.rvFragmentMain.adapter = mAdapter

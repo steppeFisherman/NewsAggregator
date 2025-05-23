@@ -28,8 +28,7 @@ class WebViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = args.url
-        data
+        binding.test.text = args.url
 
     }
 
