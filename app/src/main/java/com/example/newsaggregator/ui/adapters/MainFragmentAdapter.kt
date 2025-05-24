@@ -40,11 +40,10 @@ class MainFragmentAdapter(private val loadImage: LoadImage, private val listener
             loadImage.load(holder.itemView.context, newsImage, item.image)
             title.text = item.title
             description.text = item.description
-            pubDate.text = item.pubDate
+            dcDate.text = item.dcDate
             author.text = item.dcCreator
         }
     }
 
     class MainHolder(val binding: NewsItemRawBinding) : RecyclerView.ViewHolder(binding.root)
-
 }

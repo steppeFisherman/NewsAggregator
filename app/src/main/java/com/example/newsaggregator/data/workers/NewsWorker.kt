@@ -30,6 +30,11 @@ class NewsWorker @AssistedInject constructor(
         while (true) {
             try {
                 val dataCloud = apiService.getFullNewsList().channel.items
+
+                dataCloud.forEach {
+                    Log.d("MyCoroutineWorker", "itemDTO:$it \n\n")
+                }
+
                 val cacheList = mapper.mapCloudToCache(dataCloud)
                 newsDao.deleteAll()
                 newsDao.insertNewsList(cacheList)
@@ -37,14 +42,14 @@ class NewsWorker @AssistedInject constructor(
                 Log.d("MyCoroutineWorker", "doWork exception:$e")
             }
 
-            delay(FIFTEEN_MINUTES)
+            delay(FIFTEEN_MINUTES_REFRESH)
         }
     }
 
     companion object {
 
         const val NAME = "NewsWorker"
-        const val FIFTEEN_MINUTES = 900_000L
+        const val FIFTEEN_MINUTES_REFRESH = 900_000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<NewsWorker>().build()

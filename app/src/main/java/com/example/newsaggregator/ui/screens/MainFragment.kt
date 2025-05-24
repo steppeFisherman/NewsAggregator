@@ -7,28 +7,25 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.newsaggregator.R
 import com.example.newsaggregator.databinding.FragmentMainBinding
 import com.example.newsaggregator.ui.adapters.MainFragmentAdapter
-import com.example.newsaggregator.ui.model.DataUi
 import com.example.newsaggregator.utils.LoadImage
-import com.example.newsaggregator.utils.SearchService
 import com.example.newsaggregator.utils.SearchViewListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
+    private lateinit var menuProvider: MenuProvider
     private lateinit var mAdapter: MainFragmentAdapter
-    private val vm by activityViewModels<MainViewModel>()
-    private var mList = listOf<DataUi>()
-    private val searchService = SearchService.Base()
+    private val viewModel by activityViewModels<MainViewModel>()
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
@@ -45,16 +42,17 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.fragmentMainToolbar)
+
         adapterSetUp()
         menuProviderSetUp()
 
-        vm.newsList.observe(viewLifecycleOwner) { listDataUi ->
-            mList = listDataUi
+        viewModel.newsList.observe(viewLifecycleOwner) { listDataUi ->
             mAdapter.submitList(listDataUi)
         }
 
-        searchService.mListFilteredLiveData.observe(viewLifecycleOwner) {
-            mAdapter.submitList(it)
+        viewModel.listFiltered.observe(viewLifecycleOwner) { listDataUi ->
+            mAdapter.submitList(listDataUi)
         }
     }
 
@@ -68,28 +66,27 @@ class MainFragment : Fragment() {
     }
 
     private fun menuProviderSetUp() {
-        requireActivity().addMenuProvider(object : MenuProvider {
+        menuProvider = object : MenuProvider {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.fragment_main_toolbar_menu, menu)
-            }
+                val searchItem = menu.findItem(R.id.fragmentMain_search)
+                val searchView = searchItem.actionView as SearchView
 
-            override fun onPrepareMenu(menu: Menu) {
-                val menuItem = menu.findItem(R.id.fragmentMain_search)
-                val searchView = menuItem.actionView as SearchView
                 searchView.setOnQueryTextListener(SearchViewListener { newText ->
-                    searchService.result(mList, newText)
+                    viewModel.searchInList(newText)
                 })
             }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return true
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
+        }
+
+        requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        requireActivity().removeMenuProvider(menuProvider)
         _binding = null
     }
 }

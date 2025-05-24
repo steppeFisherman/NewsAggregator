@@ -9,8 +9,9 @@ class NewsMapperUi @Inject constructor() {
         id = dataDomain.id,
         title = dataDomain.title,
         description = dataDomain.description,
-        pubDate = dataDomain.pubDate,
+        dcDate = dataDomain.dcDate,
         image = dataDomain.image,
         dcCreator = dataDomain.dcCreator,
+        link = dataDomain.link,
     )
 }

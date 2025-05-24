@@ -4,20 +4,21 @@ import com.example.newsaggregator.data.model.cacheModel.DataCache
 import com.example.newsaggregator.data.model.cloudModel.ContentDto
 import com.example.newsaggregator.data.model.cloudModel.ItemDto
 import com.example.newsaggregator.domain.model.DataDomain
-import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 import javax.inject.Inject
 
 class NewsMapperData @Inject constructor() {
 
-    private val calendar = Calendar.getInstance()
-
     private fun mapCloudToCache(dataCloud: ItemDto) = DataCache(
         id = DEFAULT_ID,
         title = dataCloud.title,
-        description = dataCloud.description,
-        pubDate = dataCloud.description,
+        description = cleanHtmlTags(dataCloud.description),
+        dcDate = formatDate(dataCloud.dcDate),
         image = convertImageUrl(dataCloud.contents),
-        dcCreator = dataCloud.dcCreator
+        dcCreator = dataCloud.dcCreator,
+        link = dataCloud.link,
     )
 
     fun mapCloudToCache(list: List<ItemDto>): List<DataCache> =
@@ -27,10 +28,25 @@ class NewsMapperData @Inject constructor() {
         id = dataCache.id,
         title = dataCache.title,
         description = dataCache.description,
-        pubDate = dataCache.pubDate,
+        dcDate = dataCache.dcDate,
         image = dataCache.image,
         dcCreator = dataCache.dcCreator,
+        link = dataCache.link,
     )
+
+    private fun formatDate(isoDate: String?): String {
+        if (isoDate.isNullOrEmpty()) return ""
+        return try {
+            val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
+                timeZone = TimeZone.getTimeZone("UTC")
+            }
+            val output = SimpleDateFormat("yyyy MMM dd HH:mm", Locale.US)
+            val date = input.parse(isoDate) ?: return ""
+            output.format(date)
+        } catch (e: Exception) {
+            ""
+        }
+    }
 
     private fun convertImageUrl(contents: List<ContentDto>): String = try {
         contents[0].url
@@ -38,15 +54,9 @@ class NewsMapperData @Inject constructor() {
         ""
     }
 
-//    private fun convertTimestampToTime(timestamp: Long?): String {
-//        if (timestamp == null) return ""
-//        val stamp = Timestamp(timestamp * 1000)
-//        val date = Date(stamp.time)
-//        val pattern = "HH:mm"
-//        val sdf = SimpleDateFormat(pattern, Locale.getDefault())
-//        sdf.timeZone = TimeZone.getDefault()
-//        return sdf.format(date)
-//    }
+    private fun cleanHtmlTags(html: String): String {
+        return html.replace(Regex("<[^>]*>"), "")
+    }
 
     companion object {
         private const val DEFAULT_ID = 0
