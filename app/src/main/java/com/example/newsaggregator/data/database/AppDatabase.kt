@@ -18,6 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
         private val LOCK = Any()
 
         fun getInstance(context: Context): AppDatabase {
+            db?.let { return it }
             synchronized(LOCK) {
                 db?.let { return it }
                 val instance =

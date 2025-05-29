@@ -44,14 +44,14 @@ class NewsMapperData @Inject constructor() {
             val date = input.parse(isoDate) ?: return ""
             output.format(date)
         } catch (e: Exception) {
-            ""
+            e.toString()
         }
     }
 
     private fun convertImageUrl(contents: List<ContentDto>): String = try {
         contents[0].url
     } catch (e: Exception) {
-        ""
+        e.toString()
     }
 
     private fun cleanHtmlTags(html: String): String {

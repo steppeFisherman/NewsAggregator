@@ -33,9 +33,7 @@ interface DataModule {
         @Provides
         @IntoMap
         @WorkerKey(NewsWorker::class)
-        fun provideWorkerFactory(factory: NewsWorker.Factory): ChildWorkerFactory {
-            return factory
-        }
+        fun provideWorkerFactory(factory: NewsWorker.Factory): ChildWorkerFactory = factory
 
         @Provides
         @Singleton

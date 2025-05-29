@@ -1,7 +1,6 @@
 package com.example.newsaggregator.data.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker
@@ -20,9 +19,9 @@ import javax.inject.Inject
 class NewsWorker @AssistedInject constructor(
     @Assisted private val context: Context,
     @Assisted private val workerParameters: WorkerParameters,
-    @Assisted private val newsDao: NewsDao,
-    @Assisted val apiService: ApiService,
-    @Assisted val mapper: NewsMapperData
+    private val newsDao: NewsDao,
+    val apiService: ApiService,
+    val mapper: NewsMapperData
 ) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
@@ -30,16 +29,10 @@ class NewsWorker @AssistedInject constructor(
         while (true) {
             try {
                 val dataCloud = apiService.getFullNewsList().channel.items
-
-                dataCloud.forEach {
-                    Log.d("MyCoroutineWorker", "itemDTO:$it \n\n")
-                }
-
                 val cacheList = mapper.mapCloudToCache(dataCloud)
                 newsDao.deleteAll()
                 newsDao.insertNewsList(cacheList)
-            } catch (e: Exception) {
-                Log.d("MyCoroutineWorker", "doWork exception:$e")
+            } catch (_: Exception) {
             }
 
             delay(FIFTEEN_MINUTES_REFRESH)
@@ -49,7 +42,7 @@ class NewsWorker @AssistedInject constructor(
     companion object {
 
         const val NAME = "NewsWorker"
-        const val FIFTEEN_MINUTES_REFRESH = 900_000L
+        private const val FIFTEEN_MINUTES_REFRESH = 900_000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<NewsWorker>().build()
