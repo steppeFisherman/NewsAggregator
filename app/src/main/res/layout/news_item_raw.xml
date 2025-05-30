@@ -55,6 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_right"
             app:layout_constraintTop_toBottomOf="@+id/news_image"
+            android:gravity="end"
             tools:text="Martin Fisher" />
 
         <androidx.constraintlayout.widget.Guideline

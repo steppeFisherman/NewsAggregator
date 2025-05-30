@@ -11,9 +11,7 @@ import com.example.newsaggregator.data.workers.NewsWorker
 import com.example.newsaggregator.domain.model.DataDomain
 import com.example.newsaggregator.domain.usecases.NewsRepository
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class NewsRepositoryImpl @Inject constructor(
     private val application: Application,
     private val newsDao: NewsDao,
