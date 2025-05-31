@@ -25,7 +25,7 @@ interface DataModule {
 
     @Binds
     @Singleton
-    fun providesNewsRepository(
+    fun bindsNewsRepository(
         impl: NewsRepositoryImpl
     ): NewsRepository
 
@@ -44,9 +44,5 @@ interface DataModule {
         fun provideNewsDao(
             @ApplicationContext context: Context
         ): NewsDao = AppDatabase.getInstance(context).newsDao()
-
-        @Provides
-        @Singleton
-        fun provideNewsMapperData(): NewsMapperData = NewsMapperData()
     }
 }
